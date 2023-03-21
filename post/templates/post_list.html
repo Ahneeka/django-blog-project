@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post List</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+{% if user.is_authenticated %}
+{{ user.username }}
+<a href="{% url 'logout' %}">Logout</a>
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
+<a href="{% url 'signup' %}">Signup</a>
+
+    <a href="{% url 'new_post' %}">Create a new post</a>
+    {% for post in posts %}
+    <p>Post title: {{ post.title }}</p>
+    <ul>
+        <li>Post body: {{ post.body }}</li>
+        <li>Created at: {{ post.created_at }}   By: {{ post.author }}</li>
+    </ul>
+    {% endfor %}
+</body>
+</html>
